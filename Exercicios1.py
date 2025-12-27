@@ -72,4 +72,4 @@ def estatistica():
 #dicionarioNotas()
 #classificaNumeros()
 #filtroDuplo()
-estatistica()
+#estatistica()
