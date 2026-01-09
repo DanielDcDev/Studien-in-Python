@@ -1,0 +1,3 @@
+Ola mundo
+Programa iniciado
+Tudo funcionando
