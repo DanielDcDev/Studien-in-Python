@@ -1,4 +1,4 @@
-with open("estudos/aulas/aquivo.txt","w") as arquivo:
+with open("estudos/aulas/ars/aquivo.txt","w") as arquivo:
     arquivo.write("Ola mundo\n")
     arquivo.write("Programa iniciado\n")
     arquivo.write("Tudo funcionando\n")
@@ -10,7 +10,7 @@ except FileNotFoundError:
     print("Arquivo nao encontrado")
 #importante
 
-with open("estudos/aulas/aquivo.txt","r") as arq:
+with open("estudos/aulas/arqs/aquivo.txt","r") as arq:
     conteudo = arq.read()
     print(conteudo)
     

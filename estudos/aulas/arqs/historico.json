@@ -1,0 +1,44 @@
+[
+    {
+        "operacao": "soma",
+        "n1": 10,
+        "n2": 5,
+        "resultado": 15
+    },
+    {
+        "operacao": "soma",
+        "n1": 10,
+        "n2": 5,
+        "resultado": 15
+    },
+    {
+        "operacao": "soma",
+        "n1": 10,
+        "n2": 5,
+        "resultado": 15
+    },
+    {
+        "operacao": "soma",
+        "n1": 10,
+        "n2": 5,
+        "resultado": 15
+    },
+    {
+        "operacao": "soma",
+        "n1": 10,
+        "n2": 7,
+        "resultado": 17
+    },
+    {
+        "operacao": "soma",
+        "n1": 10,
+        "n2": 7,
+        "resultado": 17
+    },
+    {
+        "operacao": "soma",
+        "n1": 13,
+        "n2": 7,
+        "resultado": 20
+    }
+]
