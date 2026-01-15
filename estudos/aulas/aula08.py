@@ -36,4 +36,4 @@ def salvar_operacao(operacao, n1,n2):
 
     return historico
 
-print(salvar_operacao("soma",13,7,))
+print(salvar_operacao("soma",13 ,7,))
