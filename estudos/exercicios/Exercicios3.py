@@ -105,7 +105,6 @@ class Produto:
             with open(Produto.CAMINHO, "w", encoding="utf-8") as arq:
                 json.dump([], arq, indent=4, ensure_ascii=False)
 
-
 p1 = Produto("Carro", 12000, 3)
 p1.salvar()
 p2 = Produto("casa", 120000, 2)
@@ -126,7 +125,7 @@ Produto.produto_achado_if(produto)
 Produto.if_exist_delete("")
 
 #Produto.limpar()
-Produto.limpar(confirmar=False)
+Produto.limpar_Robusto(confirmar=True)
 
 
 

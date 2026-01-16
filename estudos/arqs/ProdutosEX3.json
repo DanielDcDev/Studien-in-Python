@@ -1,17 +1,1 @@
-[
-    {
-        "nome": "Carro",
-        "preco": 12000,
-        "quantidade": 3
-    },
-    {
-        "nome": "casa",
-        "preco": 120000,
-        "quantidade": 2
-    },
-    {
-        "nome": "Iphone 17",
-        "preco": 1200,
-        "quantidade": 12
-    }
-]
+[]
