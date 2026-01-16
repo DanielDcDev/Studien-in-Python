@@ -23,7 +23,5 @@ class Usuario:
         u1 = Usuario("Daniela", 25, "daniela@gmail.com")
         u1.salvar()
 
-        u2 = Usuario("Maria", 22, "maria@hotmail.com")
-        u2.salvar()
-
-print(Usuario.u1)
+        u3 = Usuario("Carla", 22, "maria@hotmail.com")
+        u3.salvar()
