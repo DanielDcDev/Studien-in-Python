@@ -1,8 +1,10 @@
 #proxima meta, criar interface para receber as variaveis de teste 
 
 class Produto:
-    def __init__(self, id, nome, preco, quantidade):
-        self.id = id
+    _proximo_id = 1
+    def __init__(self, nome, preco, quantidade):
+        self._id = Produto._proximo_id
+        Produto._proximo_id += 1
         self.nome = nome
         self.preco = preco
         self.quantidade = quantidade
@@ -10,6 +12,9 @@ class Produto:
 
     def vendido_quantidade(self, quantidade=1):
         self.quantidade_de_vendas += quantidade
+    @property
+    def id(self):
+        return self._id
 
 class CatalogoProdutos:
     produtos = {}
@@ -31,13 +36,15 @@ class CatalogoProdutos:
         else:
             print("Produto nao encontrado")
 
-
-
 class Pedidos:
+    _proximo_id = 1
     def __init__(self, id_produto):
         if not CatalogoProdutos.existe(id_produto):
             raise ValueError("Produto nao existe")
-
+        
+        self.idPedido = Pedidos._proximo_id
+        Pedidos._proximo_id += 1
+        
         self.produto = CatalogoProdutos.produtos[id_produto]
         self.tipo_entrega = None
         self.distancia = None
@@ -46,8 +53,8 @@ class Pedidos:
 
 
 
-p1 = Produto(1, "teclado", 70, 29)
-p2 = Produto(2, "mouse", 50, 21)
+p1 = Produto( "teclado", 70, 29)
+p2 = Produto( "mouse", 50, 21)
 
 CatalogoProdutos.adicionar(p1)
 CatalogoProdutos.adicionar(p2)
