@@ -1,3 +1,5 @@
+#proxima meta, criar interface para receber as variaveis de teste 
+
 class Produto:
     def __init__(self, id, nome, preco, quantidade):
         self.id = id
@@ -29,7 +31,7 @@ class CatalogoProdutos:
         else:
             print("Produto nao encontrado")
 
-    
+
 
 class Pedidos:
     def __init__(self, id_produto):
