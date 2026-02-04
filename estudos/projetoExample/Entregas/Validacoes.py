@@ -1,6 +1,4 @@
 import re
-from Entidades import Produto
-
 def email_valido(email: str) -> bool:
     padrao = r'^[\w\.-]+@[\w\.-]+\.\w+$'
     return re.match(padrao, email) is not None
@@ -18,3 +16,8 @@ def produto_existe(idProduto):
 def produto_existeA(idProduto):
     #deve retornar tudo do produto_existe mais a quantidade
     return print("metodo nao concluido")
+def NenhumProdutoCadastradoError(Exception):
+    pass
+def validar_catalogo_nao_vazio(produtos):
+    if not produtos:
+        raise NenhumProdutoCadastradoError()
