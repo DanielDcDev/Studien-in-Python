@@ -3,7 +3,7 @@
 class Produto:
     _proximo_id = 1
     def __init__(self, nome, preco, quantidade):
-        self._id = Produto._proximo_id
+        self.id = Produto._proximo_id
         Produto._proximo_id += 1
         self.nome = nome
         self.preco = preco
@@ -41,25 +41,20 @@ class Pedidos:
     def __init__(self, id_produto):
         if not CatalogoProdutos.existe(id_produto):
             raise ValueError("Produto nao existe")
-        
-        self.idPedido = Pedidos._proximo_id
+        self.idProduto = Pedidos._proximo_id
         Pedidos._proximo_id += 1
-        
         self.produto = CatalogoProdutos.produtos[id_produto]
         self.tipo_entrega = None
         self.distancia = None
 
 
+class Cliente:
+    _proximo_id = 1
 
-
-
-p1 = Produto( "teclado", 70, 29)
-p2 = Produto( "mouse", 50, 21)
-
-CatalogoProdutos.adicionar(p1)
-CatalogoProdutos.adicionar(p2)
-
-pedido = Pedidos(1)
-
-CatalogoProdutos.mostrar(1)
-CatalogoProdutos.mostrar(2)
+    def __init__(self,nome, senha,email,dataNascimento,endereco):
+        self.nome = nome
+        self.senha = senha 
+        self.email = email
+        self.dataNascimento = dataNascimento
+        self.endereco = endereco
+        
