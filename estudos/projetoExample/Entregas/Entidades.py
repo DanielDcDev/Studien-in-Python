@@ -20,15 +20,15 @@ class Pedidos:
     def __init__(self, id_produto):
         if not CatalogoProdutos.existe(id_produto):
             raise ValueError("Produto nao existe")
+        
         self.idProduto = Pedidos._proximo_id
         Pedidos._proximo_id += 1
         self.produto = CatalogoProdutos.produtos[id_produto]
+
         self.tipo_entrega = None
         self.distancia = None
 
 class CatalogoProdutos:
-
-
     produtos = {}
 
     @classmethod
@@ -108,11 +108,10 @@ class CatalogoProdutos:
 class CatalogoPedidos:
     pedidos = {}
 
-    
-
     @classmethod
-    def criar_pedido(cls,id_produto,tipo_entrega,distancia):
-        pass
+    def adicionar_produto(cls,id_pedido ):
+        cls.pedidos[Pedidos.id] = Pedidos
+
         
 
 class Cliente:
@@ -150,3 +149,6 @@ p2 = Produto("Cacanique", 1000,10)
 CatalogoProdutos.mostrar_todos_produtos()
 CatalogoProdutos.reduzir_estoque(1,2)
 CatalogoProdutos.mostrar_todos_produtos()
+
+
+ped1 = Pedidos()
