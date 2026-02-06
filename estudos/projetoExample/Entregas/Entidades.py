@@ -2,13 +2,14 @@
 from Validacoes import validar_catalogo_nao_vazio, NenhumProdutoCadastradoError
 class Produto:
     _proximo_id = 1
-    def __init__(self, nome, preco, quantidade):
+    def __init__(self, nome, preco, quantidade, peso):
         self._id = Produto._proximo_id
         Produto._proximo_id += 1
         self.nome = nome
         self.preco = preco
         self.quantidade = quantidade
         self.quantidade_de_vendas = 0
+        self.peso = peso
 
     @property
     def id(self):
@@ -23,8 +24,8 @@ class Pedidos:
         
         self.idProduto = Pedidos._proximo_id
         Pedidos._proximo_id += 1
-        self.produto = CatalogoProdutos.produtos[id_produto]
 
+        self.produto = CatalogoProdutos.produtos[id_produto]
         self.tipo_entrega = None
         self.distancia = None
 
@@ -58,7 +59,7 @@ class CatalogoProdutos:
             print("Produto nao encontrado")
 
     @classmethod
-    def modificar_produto(cls,id_produto,nome = None,preco = None,quantidade = None):
+    def modificar_produto(cls,id_produto,nome = None,preco = None,quantidade = None, peso = None):
         produto = cls.produtos.get(id_produto)
 
         if not produto:
@@ -70,6 +71,8 @@ class CatalogoProdutos:
             produto.preco = preco
         if quantidade is not None:
             produto.quantidade = quantidade
+        if peso is not None:
+            produto.peso = peso
         
     @classmethod
     def deletar_produto(cls, id_produto):
@@ -81,13 +84,13 @@ class CatalogoProdutos:
     @classmethod
     def mostrar_todos_produtos(cls):
         try:
-
             for produto in cls.produtos.values():
                 print(
                     f"ID: {produto.id} |"
                     f"Nome: {produto.nome} |"
                     f"Preco: {produto.preco} |"
-                    f"Quantidade: {produto.quantidade}"
+                    f"Quantidade: {produto.quantidade}|"
+                    f"Peso: {produto.peso}"
                 )
         except NenhumProdutoCadastradoError:
             print("nenhum produto Cadastrado")
@@ -109,9 +112,9 @@ class CatalogoPedidos:
     pedidos = {}
 
     @classmethod
-    def adicionar_produto(cls,id_pedido ):
-        cls.pedidos[Pedidos.id] = Pedidos
-
+    def adicionar_pedido(cls,pedido ):
+      #  cls.pedidos[Pedidos.id] = Pedidos
+        pass
         
 
 class Cliente:
@@ -142,13 +145,10 @@ class Entregadores:
         return self._id
 
 
-p1 = Produto("Carro", 12000,12)
-p2 = Produto("Cacanique", 1000,10)
+p1 = Produto("Carro", 12000,12, 500)
+p2 = Produto("Cacanique", 1000,10,47)
 
+CatalogoProdutos.adicionar(p1)
+CatalogoProdutos.adicionar(p2)
 
 CatalogoProdutos.mostrar_todos_produtos()
-CatalogoProdutos.reduzir_estoque(1,2)
-CatalogoProdutos.mostrar_todos_produtos()
-
-
-ped1 = Pedidos()
