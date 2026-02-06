@@ -1,4 +1,5 @@
-def Tipo_entrega(distancia, peso):
-    if distancia>=500 and :
-        return "aviao"
-    else: distancia
+def escolher_veiculo(veiculos, distancia, peso):
+    for Veiculo in veiculos:
+        if Veiculo.atende_requisitos(distancia, peso):
+            return Veiculo.nome_modelo
+    return None

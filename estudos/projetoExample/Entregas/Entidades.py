@@ -2,10 +2,11 @@
 
     #proxima meta, criar interface para receber as variaveis de teste 
 from Validacoes import validar_catalogo_nao_vazio, NenhumProdutoCadastradoError
-from Metodos import Tipo_entrega
+from Metodos import escolher_veiculo
 
 
 class Produto:
+    _proximo_id = 1
     def __init__(self, nome, preco, quantidade, peso):
         self._id = Produto._proximo_id
         Produto._proximo_id += 1
@@ -53,7 +54,40 @@ class Veiculo:
         if self.peso_maximo is not None and peso > self.peso_maximo:
             return False
         return True
+    
+class Carro(Veiculo):
+    def __init__(self, nome_modelo):
+        super().__init__(
+            nome_modelo =nome_modelo ,
+            distancia_minima = 100 , 
+            entregas_minimas = 5, 
+            peso_minimo = 50, 
+            peso_maximo = 150
+            )
+        
+class Moto(Veiculo):
+    def __init__(self, nome_modelo):
+        super().__init__(
+            nome_modelo = nome_modelo,
+            distancia_minima = 1,
+            entregas_minimas = 1,
+            peso_minimo = 0, 
+            peso_maximo = 20
+            )
+        
+
+class Aviao(Veiculo):
+    def __init__(self, nome_modelo):
+        super().__init__(
+            nome_modelo = nome_modelo,
+            distancia_minima = 500,
+            entregas_minimas = 100, 
+            peso_minimo = 1000,
+            peso_maximo = 10000
+            )
 class CatalogoProdutos:
+    
+    _proximo_id = 1
     produtos = {}
 
     @classmethod
@@ -176,3 +210,17 @@ CatalogoProdutos.adicionar(p1)
 CatalogoProdutos.adicionar(p2)
 
 CatalogoProdutos.mostrar_todos_produtos()
+
+veiculos = [
+    Moto("Honda CG"),
+    Carro("Fiorino"),
+    Aviao("Boeing 737")
+]
+
+resultado = escolher_veiculo(
+    veiculos=veiculos,
+    distancia=1000,
+    peso=12
+)
+
+print(resultado)
