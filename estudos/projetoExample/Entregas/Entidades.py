@@ -1,7 +1,11 @@
+
+
     #proxima meta, criar interface para receber as variaveis de teste 
 from Validacoes import validar_catalogo_nao_vazio, NenhumProdutoCadastradoError
+from Metodos import Tipo_entrega
+
+
 class Produto:
-    _proximo_id = 1
     def __init__(self, nome, preco, quantidade, peso):
         self._id = Produto._proximo_id
         Produto._proximo_id += 1
@@ -16,7 +20,6 @@ class Produto:
         return self._id
     
 class Pedidos:
-    _proximo_id = 1
 
     def __init__(self, id_produto):
         if not CatalogoProdutos.existe(id_produto):
@@ -29,6 +32,27 @@ class Pedidos:
         self.tipo_entrega = None
         self.distancia = None
 
+class Veiculo:
+    _proximo_id = 1
+    def __init__(self, nome_modelo, distancia_minima, entregas_minimas, peso_minimo=0, peso_maximo=None):
+        self.id = Veiculo._proximo_id
+        Veiculo._proximo_id +=1
+
+        self.nome_modelo = nome_modelo
+        self.quantidade_entregas = 0
+        self.distancia_minima = distancia_minima
+        self.entregas_minimas = entregas_minimas
+        self.peso_minimo = peso_minimo
+        self.peso_maximo = peso_maximo
+    
+    def atende_requisitos(self,distancia, peso):
+        if distancia < self.distancia_minima:
+            return False
+        if peso < self.peso_minimo:
+            return False
+        if self.peso_maximo is not None and peso > self.peso_maximo:
+            return False
+        return True
 class CatalogoProdutos:
     produtos = {}
 
