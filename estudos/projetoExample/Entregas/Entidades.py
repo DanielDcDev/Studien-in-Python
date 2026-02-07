@@ -1,8 +1,6 @@
+#proxima meta, criar interface para receber as variaveis de teste 
 
-
-    #proxima meta, criar interface para receber as variaveis de teste 
 from Validacoes import validar_catalogo_nao_vazio, NenhumProdutoCadastradoError
-from Metodos import escolher_veiculo
 
 
 class Produto:
@@ -35,7 +33,7 @@ class Pedidos:
 
 class Veiculo:
     _proximo_id = 1
-    def __init__(self, nome_modelo, distancia_minima, entregas_minimas, peso_minimo=0, peso_maximo=None):
+    def __init__(self, nome_modelo, distancia_minima, entregas_minimas,entregas_maximas, velocidade_kmh, peso_minimo=0, peso_maximo=None):
         self.id = Veiculo._proximo_id
         Veiculo._proximo_id +=1
 
@@ -43,34 +41,53 @@ class Veiculo:
         self.quantidade_entregas = 0
         self.distancia_minima = distancia_minima
         self.entregas_minimas = entregas_minimas
+        self.entregas_maximas = entregas_maximas
         self.peso_minimo = peso_minimo
         self.peso_maximo = peso_maximo
+        self.velocidade_kmh = velocidade_kmh
     
-    def atende_requisitos(self,distancia, peso):
-        if distancia < self.distancia_minima:
-            return False
-        if peso < self.peso_minimo:
-            return False
-        if self.peso_maximo is not None and peso > self.peso_maximo:
-            return False
-        return True
+    def atende_entrega(self,distancia, peso, quantidade_entregas):
+        return(
+            distancia <= self.distancia_minima and 
+            peso <=self.peso_maximo and 
+            quantidade_entregas <= self.entregas_maximas
+        )
+    
+    def tempo_estimado_horas(self, distancia):
+        return distancia / self.velocidade_kmh
+    
+    def escolher_veiculo(distancia, peso, quantidade_entregas):
+        veiculos = [Moto(), Carro(), Aviao()]
+
+        for veiculo in veiculos:
+            if veiculo.atende_entrega(distancia, peso, quantidade_entregas):
+                return veiculo
+
+        raise ValueError("Nenhum veiculo atende essa entrega")
+
     
 class Carro(Veiculo):
-    def __init__(self, nome_modelo):
+    def __init__(self, nome_modelo, velocidade_kmh):
         super().__init__(
             nome_modelo =nome_modelo ,
             distancia_minima = 100 , 
-            entregas_minimas = 5, 
-            peso_minimo = 50, 
-            peso_maximo = 150
+            distancia_maxima = 500,
+            entregas_minimas = 5,
+            entregas_maximas= 20, 
+            peso_minimo = 20, 
+            peso_maximo = 150,
+            velocidade_kmh= velocidade_kmh
             )
         
 class Moto(Veiculo):
-    def __init__(self, nome_modelo):
+    def __init__(self, nome_modelo,velocidade_kmh):
         super().__init__(
             nome_modelo = nome_modelo,
             distancia_minima = 1,
+            distancia_maxima = 100,
             entregas_minimas = 1,
+            entregas_maximas= 5,
+            velocidade_kmh= velocidade_kmh,
             peso_minimo = 0, 
             peso_maximo = 20
             )
@@ -84,7 +101,8 @@ class Aviao(Veiculo):
             entregas_minimas = 100, 
             peso_minimo = 1000,
             peso_maximo = 10000
-            )
+            )        
+
 class CatalogoProdutos:
     
     _proximo_id = 1
@@ -164,16 +182,13 @@ class CatalogoProdutos:
         
         produto.quantidade -= quantidade
 
-
-
 class CatalogoPedidos:
     pedidos = {}
 
     @classmethod
     def adicionar_pedido(cls,pedido ):
       #  cls.pedidos[Pedidos.id] = Pedidos
-        pass
-        
+        pass       
 
 class Cliente:
     _proximo_id = 1
@@ -209,18 +224,18 @@ p2 = Produto("Cacanique", 1000,10,47)
 CatalogoProdutos.adicionar(p1)
 CatalogoProdutos.adicionar(p2)
 
+
 CatalogoProdutos.mostrar_todos_produtos()
-
 veiculos = [
-    Moto("Honda CG"),
-    Carro("Fiorino"),
-    Aviao("Boeing 737")
+    Moto("Honda CG",120),
+    Carro("Fiorino", 170),
+    Aviao("Boeing 737",2550)
 ]
+distancia = 120
+peso = 20
+quantidade = 3
 
-resultado = escolher_veiculo(
-    veiculos=veiculos,
-    distancia=1000,
-    peso=12
-)
+veiculo = Veiculo.escolher_veiculo(distancia, peso, quantidade)
 
-print(resultado)
+print("Veiculo escolhido:", veiculo.nome)
+print("Tempo estimado (horas):", veiculo.tempo_estimado_horas(distancia))
